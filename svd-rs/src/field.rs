@@ -31,7 +31,6 @@ pub struct FieldInfo {
     pub description: Option<String>,
 
     /// Bit position of the field within the register
-    #[cfg_attr(feature = "serde", serde(flatten))]
     pub bit_range: BitRange,
 
     /// Predefined strings set the access type.

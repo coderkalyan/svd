@@ -8,6 +8,10 @@ pub enum Error {
 
 /// A bit range, describing the [least significant bit](Self::lsb) and [most significant bit](Self::msb)
 #[derive(Clone, Copy, Debug, PartialEq)]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize)
+)]
 pub struct BitRange {
     /// Value defining the position of the least significant bit of the field within the register
     pub offset: u32,
@@ -21,11 +25,27 @@ pub struct BitRange {
 
 /// The style of bit range that describes a [BitRange]
 #[derive(Clone, Copy, Debug, PartialEq)]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize)
+)]
 pub enum BitRangeType {
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "bit_range")
+    )]
     /// A bit range in the format: `[<msb>:<lsb>]`
     BitRange,
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "offset_width")
+    )]
     /// A bit range described as offset and width
     OffsetWidth,
+    #[cfg_attr(
+        feature = "serde",
+        serde(rename = "msb_lsb")
+    )]
     /// A bit range described as lsb and msb as separate elements
     MsbLsb,
 }
@@ -115,15 +135,15 @@ mod ser_de {
         }
     }
 
-    impl Serialize for BitRange {
-        fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-        where
-            S: Serializer,
-        {
-            let bit_range = SerBitRange::from(*self);
-            bit_range.serialize(serializer)
-        }
-    }
+    // impl Serialize for BitRange {
+    //     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    //     where
+    //         S: Serializer,
+    //     {
+    //         let bit_range = SerBitRange::from(*self);
+    //         bit_range.serialize(serializer)
+    //     }
+    // }
 
     impl<'de> Deserialize<'de> for BitRange {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
