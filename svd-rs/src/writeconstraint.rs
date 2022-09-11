@@ -2,7 +2,6 @@
 #[cfg_attr(
     feature = "serde",
     derive(serde::Deserialize, serde::Serialize),
-    serde(rename_all = "camelCase")
 )]
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum WriteConstraint {

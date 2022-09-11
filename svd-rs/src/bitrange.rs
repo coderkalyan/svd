@@ -84,11 +84,9 @@ mod ser_de {
     #[derive(serde::Serialize, serde::Deserialize)]
     #[serde(untagged)]
     enum SerBitRange {
-        #[serde(rename_all = "camelCase")]
         BitRange {
             bit_range: String,
         },
-        #[serde(rename_all = "camelCase")]
         OffsetWidth {
             bit_offset: u32,
             bit_width: u32,

@@ -18,7 +18,6 @@ pub enum Error {
 #[cfg_attr(
     feature = "serde",
     derive(serde::Deserialize, serde::Serialize),
-    serde(rename_all = "camelCase")
 )]
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 #[non_exhaustive]
